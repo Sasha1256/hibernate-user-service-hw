@@ -6,7 +6,6 @@ import mate.academy.model.User;
 import mate.academy.security.AuthenticationService;
 import mate.academy.service.UserService;
 import mate.academy.util.HashUtil;
-
 import java.util.Optional;
 
 public class AuthenticationServiceImpl implements AuthenticationService {

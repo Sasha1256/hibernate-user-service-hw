@@ -1,12 +1,11 @@
 package mate.academy.dao.impl;
 
 import mate.academy.dao.UserDao;
+import java.util.Optional;
 import mate.academy.model.User;
 import mate.academy.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
-import java.util.Optional;
 
 public class UserDaoImpl implements UserDao {
     @Override

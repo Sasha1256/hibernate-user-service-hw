@@ -2,10 +2,10 @@ package mate.academy.service.impl;
 
 import mate.academy.dao.UserDao;
 import mate.academy.lib.Inject;
+import java.util.Optional;
 import mate.academy.model.User;
 import mate.academy.service.UserService;
 import mate.academy.util.HashUtil;
-import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
     @Inject
