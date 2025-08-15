@@ -1,0 +1,45 @@
+package mate.academy.dao.impl;
+
+import mate.academy.dao.UserDao;
+import mate.academy.model.User;
+import mate.academy.util.HibernateUtil;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import java.util.Optional;
+
+public class UserDaoImpl implements UserDao {
+    @Override
+    public User save(User user) {
+        Session session = null;
+        Transaction transaction = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            session.save(user);
+            transaction.commit();
+            return user;
+        } catch (Exception exception) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new RuntimeException("Cannot save user", exception);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+    @Override
+    public User get(Long id) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        return session.get(User.class, id);
+    }
+
+    @Override
+    public Optional<User> getByUsername(String username) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        return Optional.of(session.get(User.class, username));
+    }
+}
