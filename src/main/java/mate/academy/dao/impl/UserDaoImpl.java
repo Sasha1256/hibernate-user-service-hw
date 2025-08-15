@@ -32,13 +32,15 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User get(Long id) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        return session.get(User.class, id);
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.get(User.class, id);
+        }
     }
 
     @Override
-    public Optional<User> getByUsername(String username) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        return Optional.of(session.get(User.class, username));
+    public Optional<User>  findByEmail(String email) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return Optional.of(session.get(User.class, email));
+        }
     }
 }
