@@ -8,7 +8,7 @@ public class HashUtil {
     private HashUtil() {
     }
 
-    private static final String ALGORITM = "SHA-256";
+    private static final String ALGORITHM = "SHA-256";
 
     public static byte[] salt() {
         SecureRandom secureRandom = new SecureRandom();
@@ -20,14 +20,13 @@ public class HashUtil {
     public static String hashPassword(String password, byte[] salt) {
         StringBuilder stringBuilder = new StringBuilder();
         try {
-            MessageDigest messageDigest = MessageDigest.getInstance(ALGORITM);
-            byte[] digest = messageDigest.digest(password.getBytes());
+            MessageDigest messageDigest = MessageDigest.getInstance(ALGORITHM);
             messageDigest.update(salt);
+            byte[] digest = messageDigest.digest(password.getBytes());
             for (byte b : digest) {
                 stringBuilder.append(String.format("%02x",b));
             }
             return stringBuilder.toString();
-
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }

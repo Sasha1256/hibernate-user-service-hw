@@ -34,13 +34,17 @@ public class UserDaoImpl implements UserDao {
     public User get(Long id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.get(User.class, id);
+        } catch (Exception exception) {
+            throw new RuntimeException("Cannot get user", exception);
         }
     }
 
     @Override
     public Optional<User>  findByEmail(String email) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return Optional.of(session.get(User.class, email));
+            return Optional.ofNullable(session.get(User.class, email));
+        } catch (Exception exception) {
+            throw new RuntimeException("Cannot get user", exception);
         }
     }
 }
