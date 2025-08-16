@@ -10,6 +10,7 @@ public class User {
     @Column(unique = true)
     private String email;
     private String password;
+    @Column(columnDefinition = "BLOB")
     private byte[] salt;
 
     public byte[] getSalt() {
